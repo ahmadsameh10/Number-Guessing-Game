@@ -1,1 +1,1 @@
-# Smart-Study-Assistant
+# Guessing Game
