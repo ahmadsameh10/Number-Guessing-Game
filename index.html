@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎰 Guess the Number</h1>
+            <p>اخترت رقم بين 0 و 100... خمنه لو تقدر !🫡</p>
+        </header>
+
+        <div class="stats">
+            <div class="stat-box">المحاولات: <span>{{ attempts }}</span></div>
+            <div class="stat-box best">أفضل اسكور🥇: <span>{{ best_score if best_score != None else '-' }}</span></div>
+        </div>
+
+        {% if message %}
+            <div class="alert {{ status }}">{{ message }}</div>
+        {% endif %}
+
+        {% if game_over %}
+            <div class="result-box">
+                <h2>{{ sarcastic_comment }}</h2>
+                <a href="{{ url_for('reset') }}" class="btn">إعادة اللعبة 🔄</a>
+            </div>
+        {% else %}
+            <form method="POST" action="{{ url_for('index') }}">
+                <input type="number" name="guess" min="0" max="100" placeholder="تخمينك..." required autofocus>
+                <button type="submit" class="btn">خــمــن 🎯</button>
+            </form>
+        {% endif %}
+
+        {% if history %}
+            <div class="history">سجل التخمينات: {{ history | join(' ← ') }}</div>
+        {% endif %}
+    </div>
+
+    {% if game_over %}
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+    </script>
+    {% endif %}
+</body>
+</html>
