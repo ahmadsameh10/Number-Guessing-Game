@@ -45,7 +45,16 @@ Until the correct number is guessed 🎉
 ## 🛠 Tech Stack
 
 * **Language:** Python
-* **Library:** random (built-in)
+* **Libraries / Frameworks:** 
+- Flask  
+- Jinja2  
+- Werkzeug  
+- itsdangerous  
+- click  
+- blinker  
+- colorama  
+- MarkupSafe  
+- random (built-in)
 
 ---
 
